@@ -4,9 +4,9 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Health Bar")]
     private float health;
     private float lerpTimer;
+    [Header("Health Bar")]
     public int maxHealth = 100;
     public float chipSpeed = 2f;
     public Image frontHealthBar;
@@ -17,8 +17,8 @@ public class PlayerHealth : MonoBehaviour
     public Image overlay;
     public float duration;
     public float fadeSpeed;
-
     private float durationTimer;
+
     void Start()
     {
         health = maxHealth;
@@ -30,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthUI();
         if(overlay.color.a > 0)
         {
+            if(health < 30)
+            return;
             durationTimer += Time.deltaTime;
             if(durationTimer > duration)
             {
@@ -66,7 +68,7 @@ public class PlayerHealth : MonoBehaviour
         healthText.text = health + "/" + maxHealth;
     }
 
-    public void TakeDamage(float healAmount)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         lerpTimer = 0f;
